@@ -17,7 +17,7 @@ class HostTransport {
       this.updateInfo.value = info
     })
     await new Promise((resolve) => {
-      this.socket = new Sockette(`ws://${window.location.host}/events`, {
+      this.socket = new Sockette(`wss://${window.location.host}/events`, {
         onmessage: (e) => {
           this.selfDispatch(JSON.parse(e.data))
         },
