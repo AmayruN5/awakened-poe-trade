@@ -217,7 +217,14 @@ export function createFilters (
     }
   }
 
-  if (
+  if (item.rarity === ItemRarity.Magic && (
+    item.category === ItemCategory.Jewel ||
+    item.category === ItemCategory.AbyssJewel
+  )) {
+    filters.rarity = {
+      value: 'magic'
+    }
+  } else if (
     item.rarity === ItemRarity.Normal ||
     item.rarity === ItemRarity.Magic ||
     item.rarity === ItemRarity.Rare
@@ -229,6 +236,10 @@ export function createFilters (
 
   if (item.isMirrored) {
     filters.mirrored = { disabled: false }
+  }
+
+  if (!item.isFractured && opts.exact) {
+    filters.fractured = { value: false }
   }
 
   if (item.isFoil) {
